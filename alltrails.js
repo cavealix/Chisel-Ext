@@ -16,10 +16,15 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
       total: document.querySelectorAll('*').length,
       inputs: document.querySelectorAll('input').length,
       buttons: document.querySelectorAll('button').length,
-      trailName: document.querySelectorAll('h1').length,
     };
 
-    console.log(domInfo);
+    var rootElement = document.getElementById('desktop-header').childNodes[1].getAttribute("data-react-props");
+    var rootData = JSON.parse(rootElement);
+    console.log(rootData);
+
+    var content = document.getElementById('main').childNodes[1].childNodes[1].getAttribute("data-react-props");
+    var contentData = JSON.parse(rootElement);
+    console.log(contentData.currentUser.username
 
     // Directly respond to the sender (popup), 
     // through the specified callback.
