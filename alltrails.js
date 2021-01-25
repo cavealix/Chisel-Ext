@@ -26,6 +26,14 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
     var contentData = JSON.parse(content);
     console.log(contentData);
 
+    function geoSuccess(pos){
+    	console.log(pos);
+    }
+
+    //get user location
+    if (navigator.geolocation)
+        navigator.geolocation.getCurrentPosition(geoSuccess);
+
     // Directly respond to the sender (popup), 
     // through the specified callback.
     response(contentData);
