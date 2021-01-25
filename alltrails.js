@@ -23,11 +23,11 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
     console.log(rootData);
 
     var content = document.getElementById('main').childNodes[1].childNodes[1].getAttribute("data-react-props");
-    var contentData = JSON.parse(rootElement);
-    console.log(contentData.currentUser.username
+    var contentData = JSON.parse(content);
+    console.log(contentData);
 
     // Directly respond to the sender (popup), 
     // through the specified callback.
-    response(domInfo);
+    response(contentData);
   }
 });

@@ -1,9 +1,8 @@
 // Update the relevant fields with the new data.
 const setDOMInfo = info => {
-  document.getElementById('total').textContent = info.total;
-  document.getElementById('inputs').textContent = info.inputs;
-  document.getElementById('buttons').textContent = info.buttons;
   document.getElementById('trail_name').textContent = info.trailName;
+  document.getElementById('latitude').textContent = info.initialCenter[0];
+  document.getElementById('longitude').textContent = info.initialCenter[1];
 };
 
 // Once the DOM is ready...
