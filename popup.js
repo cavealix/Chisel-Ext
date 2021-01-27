@@ -1,8 +1,10 @@
 // Update the relevant fields with the new data.
-const setDOMInfo = info => {
-  document.getElementById('trail_name').textContent = info.trailName;
-  document.getElementById('latitude').textContent = info.initialCenter[0];
-  document.getElementById('longitude').textContent = info.initialCenter[1];
+const setDOMInfo = trailData => {
+  document.getElementById('trail_name').textContent = trailData.name;
+  document.getElementById('latitude').textContent = trailData.latitude;
+  document.getElementById('longitude').textContent = trailData.longitude;
+  document.getElementById('elev_gain').textContent = trailData.elev_gain;
+  document.getElementById('length').textContent = trailData.length;
 };
 
 // Once the DOM is ready...
@@ -26,7 +28,6 @@ window.addEventListener('DOMContentLoaded', () => {
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   // First, validate the message's structure.
   if ((msg.from === 'background') && (msg.subject === 'elevation')) {
-    console.log(msg);
     document.getElementById('elevation').textContent = msg.data.results[0].elevation;
   }
 });

@@ -10,23 +10,13 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
   // First, validate the message's structure.
   if ((msg.from === 'popup') && (msg.subject === 'DOMInfo')) {
     // Collect the necessary data. 
-    // (For your specific requirements `document.querySelectorAll(...)`
-    //  should be equivalent to jquery's `$(...)`.)
-    var domInfo = {
-      total: document.querySelectorAll('*').length,
-      inputs: document.querySelectorAll('input').length,
-      buttons: document.querySelectorAll('button').length,
-    };
+    
 
-    var rootElement = document.getElementById('desktop-header').childNodes[1].getAttribute("data-react-props");
+    /*var rootElement = document.getElementById('desktop-header').childNodes[1].getAttribute("data-react-props");
     var rootData = JSON.parse(rootElement);
-    console.log(rootData);
+    console.log(rootData);*/
 
-    var content = document.getElementById('main').childNodes[1].childNodes[1].getAttribute("data-react-props");
-    var contentData = JSON.parse(content);
-    console.log(contentData);
-
-
+    //message user coordinates to background to make API call
     function geoSuccess(pos){
     	console.log(pos);
     	//send url api call to background to avoid CORs restrictions
@@ -45,8 +35,20 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
         navigator.geolocation.getCurrentPosition(geoSuccess);
     }
 
+    //read trail data
+    var content = document.getElementById('main').childNodes[1].childNodes[1].getAttribute("data-react-props");
+    var contentData = JSON.parse(content);
+
     // Directly respond to the sender (popup), 
     // through the specified callback.
-    response(contentData);
+    var trailData = {
+      name: contentData.initialSelectedObject.name,
+      elev_gain: contentData.initialSelectedObject.elevation_gain,
+      duration_minutes: contentData.initialSelectedObject.duration_minutes,
+      latitude: contentData.initialCenter[0],
+      longitude: contentData.initialCenter[1],
+      length: contentData.initialSelectedObject.length
+    };
+    response(trailData);
   }
 });
