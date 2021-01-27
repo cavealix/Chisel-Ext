@@ -27,8 +27,15 @@
     //  "38": "img/icon38.png"
     //},
     "default_popup": "popup.html"
-  }
-
-  // No special permissions required...
-  //"permissions": []
+  },
+  //load all data resources, including api keys
+  "web_accessible_resources": [
+    "data/*.json"
+  ],
+  //special permissions required...
+  "permissions": [
+    "*://*.alltrails.com/*",
+    "*://*.maps.googleapis.com/*",
+    "*://*.history.openweathermap.org/*"
+  ]
 }

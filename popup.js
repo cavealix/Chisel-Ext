@@ -21,3 +21,12 @@ window.addEventListener('DOMContentLoaded', () => {
         setDOMInfo);
   });
 });
+
+//fetch api call JSON for content script
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  // First, validate the message's structure.
+  if ((msg.from === 'background') && (msg.subject === 'elevation')) {
+    console.log(msg);
+    document.getElementById('elevation').textContent = msg.data.results[0].elevation;
+  }
+});
