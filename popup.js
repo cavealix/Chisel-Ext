@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-//fetch api call JSON for content script
+//receive user elevation
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   // First, validate the message's structure.
   if ((msg.from === 'background') && (msg.subject === 'elevation')) {

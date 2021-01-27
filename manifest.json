@@ -11,7 +11,7 @@
   },
   "content_scripts": [{
     "matches": ["*://*.stackoverflow.com/*"],
-    "js": ["content.js"],
+    "js": ["alltrails.js"],
     "run_at": "document_idle",
     "all_frames": false
   }, {

@@ -5,35 +5,34 @@ chrome.runtime.sendMessage({
   subject: 'showPageAction',
 });
 
+//message user coordinates to background to make API call
+function geoSuccess(pos){
+	console.log(pos);
+	//send url api call to background to avoid CORs restrictions
+	chrome.runtime.sendMessage(
+    	{from: 'alltrails', subject: 'fetchJSON', lat: pos.coords.latitude, lon: pos.coords.longitude}, (response) => {
+    		if(response){
+    			console.log(response);
+    		}
+    	// ...also specifying a callback to be called 
+    	//    from the receiving end (content script).
+    });
+}
+
+//get user location
+if (navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(geoSuccess);
+}
+
 // Listen for messages from the popup.
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
   // First, validate the message's structure.
   if ((msg.from === 'popup') && (msg.subject === 'DOMInfo')) {
     // Collect the necessary data. 
     
-
     /*var rootElement = document.getElementById('desktop-header').childNodes[1].getAttribute("data-react-props");
     var rootData = JSON.parse(rootElement);
     console.log(rootData);*/
-
-    //message user coordinates to background to make API call
-    function geoSuccess(pos){
-    	console.log(pos);
-    	//send url api call to background to avoid CORs restrictions
-    	chrome.runtime.sendMessage(
-        {from: 'alltrails', subject: 'fetchJSON', lat: pos.coords.latitude, lon: pos.coords.longitude}, (response) => {
-        	if(response){
-        		console.log(response);
-        	}
-        // ...also specifying a callback to be called 
-        //    from the receiving end (content script).
-        });
-    }
-
-    //get user location
-    if (navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(geoSuccess);
-    }
 
     //read trail data
     var content = document.getElementById('main').childNodes[1].childNodes[1].getAttribute("data-react-props");
@@ -49,6 +48,8 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
       longitude: contentData.initialCenter[1],
       length: contentData.initialSelectedObject.length
     };
+
+    //send reply of trail data back to popup.js
     response(trailData);
   }
 });
