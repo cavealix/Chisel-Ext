@@ -7,15 +7,16 @@ chrome.runtime.sendMessage({
 
 //message user coordinates to background to make API call
 function geoSuccess(pos){
-	console.log(pos);
+
 	//send url api call to background to avoid CORs restrictions
 	chrome.runtime.sendMessage(
-    	{from: 'alltrails', subject: 'fetchJSON', lat: pos.coords.latitude, lon: pos.coords.longitude}, (response) => {
-    		if(response){
-    			console.log(response);
-    		}
-    	// ...also specifying a callback to be called 
-    	//    from the receiving end (content script).
+    	{from: 'alltrails', subject: 'getElevation', lat: pos.coords.latitude, lon: pos.coords.longitude}, (response) => {
+    		// ...also specifying a callback to be called 
+    		//from the receiving end (content script).
+    		
+    		console.log(response);
+    		chrome.runtime.sendMessage({from: 'alltrails', subject: 'elevation', data: response.results[0].elevation});
+    		console.log(response);
     });
 }
 

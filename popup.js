@@ -27,7 +27,8 @@ window.addEventListener('DOMContentLoaded', () => {
 //receive user elevation
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   // First, validate the message's structure.
-  if ((msg.from === 'background') && (msg.subject === 'elevation')) {
-    document.getElementById('elevation').textContent = msg.data.results[0].elevation;
+    console.log(msg);
+  if ((msg.from === 'alltrails') && (msg.subject === 'elevation')) {
+    document.getElementById('elevation').textContent = msg.data;
   }
 });
