@@ -28,7 +28,17 @@ window.addEventListener('DOMContentLoaded', () => {
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   // First, validate the message's structure.
     console.log(msg);
-  if ((msg.from === 'alltrails') && (msg.subject === 'elevation')) {
-    document.getElementById('elevation').textContent = msg.data;
+  if ((msg.from === 'alltrails') && (msg.subject === 'user_elevation')) {
+    document.getElementById('user_elevation').textContent = Math.round(msg.data.results[0].elevation);
+  }
+});
+
+
+//receive trail elevation
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  // First, validate the message's structure.
+    console.log(msg);
+  if ((msg.from === 'alltrails') && (msg.subject === 'trail_elevation')) {
+    document.getElementById('trail_elevation').textContent = Math.round(msg.data.results[0].elevation);
   }
 });

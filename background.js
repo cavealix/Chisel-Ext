@@ -13,6 +13,7 @@ async function fetchJSON(pathToResource) {
 //fetch Google Elevation API call JSON for content script
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
   // First, validate the message's structure.
+  console.log(msg);
   if ((msg.from === 'alltrails') && (msg.subject === 'getElevation')) {
     var url = "https://maps.googleapis.com/maps/api/elevation/json?locations="+msg.lat+','+msg.lon+"&key=AIzaSyA6vPQadfKIysVDgq0so6T3-OReZbIfBa4";
     //request API fetch, wait to be fulfilled, then return result as original message response

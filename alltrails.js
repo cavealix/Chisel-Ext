@@ -13,10 +13,8 @@ function geoSuccess(pos){
     	{from: 'alltrails', subject: 'getElevation', lat: pos.coords.latitude, lon: pos.coords.longitude}, (response) => {
     		// ...also specifying a callback to be called 
     		//from the receiving end (content script).
-    		
-    		console.log(response);
-    		chrome.runtime.sendMessage({from: 'alltrails', subject: 'elevation', data: response.results[0].elevation});
-    		console.log(response);
+    		//send elevation data to popup.js
+    		chrome.runtime.sendMessage({from: 'alltrails', subject: 'user_elevation', data: response});
     });
 }
 
@@ -38,6 +36,15 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
     //read trail data
     var content = document.getElementById('main').childNodes[1].childNodes[1].getAttribute("data-react-props");
     var contentData = JSON.parse(content);
+
+    //send url api call to background to avoid CORs restrictions
+	chrome.runtime.sendMessage(
+    	{from: 'alltrails', subject: 'getElevation', lat: contentData.initialCenter[0], lon: contentData.initialCenter[1]}, (response) => {
+    		// ...also specifying a callback to be called 
+    		//from the receiving end (content script).
+    		//send elevation data to popup.js
+    		chrome.runtime.sendMessage({from: 'alltrails', subject: 'trail_elevation', data: response});
+    });
 
     // Directly respond to the sender (popup), 
     // through the specified callback.
