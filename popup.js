@@ -2,7 +2,7 @@
 const setDOMInfo = trailData => {
   document.getElementById('trail_name').textContent = trailData.name;
   document.getElementById('latitude').textContent = trailData.latitude;
-  document.getElementById('longitude').textContent = trailData.longitude;
+  document.getElementById('longitude') = trailData.longitude;
   document.getElementById('elev_gain').textContent = trailData.elev_gain;
   document.getElementById('length').textContent = trailData.length;
 };
@@ -28,6 +28,6 @@ window.addEventListener('DOMContentLoaded', () => {
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   // First, validate the message's structure.
   if ((msg.from === 'background') && (msg.subject === 'elevation')) {
-    document.getElementById('elevation').textContent = msg.data.results[0].elevation;
+    document.getElementById('elevation')= msg.data.results[0].elevation;
   }
 });

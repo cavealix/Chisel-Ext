@@ -1,0 +1,46 @@
+:root {
+  font-size: 62.5%;
+}
+
+body {
+  background-image: url("/background.jpeg");
+  background-size: auto;
+}
+.popup {
+  width: 50rem;
+  padding: 0.5rem 2rem 2rem 2rem;
+}
+
+.container {
+  height: 10rem;
+  margin: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+.container--header {
+  padding: 2.5rem;
+  font-size: 5rem;
+  text-align: center;
+  text-transform: lowercase;
+  font-family: "Yellowtail", cursive;
+  /* background-color: #428a13; */
+  color: white;
+}
+
+.container--name {
+  font-size: 3.5rem;
+  text-align: center;
+}
+.container--componant__header {
+  font-size: 4rem;
+}
+
+.container--componant__sub {
+  font-size: 3rem;
+  display: inline;
+}
