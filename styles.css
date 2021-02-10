@@ -38,6 +38,7 @@ body {
 }
 .container--componant__header {
   font-size: 4rem;
+  font-family: "Lato", sans-serif;
 }
 
 .container--componant__sub {
