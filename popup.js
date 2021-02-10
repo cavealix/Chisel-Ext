@@ -1,12 +1,13 @@
 // Update the relevant fields with the new data.
 const setDOMInfo = trailData => {
-  document.getElementById('trail_name').textContent = trailData.name;
+  // document.getElementById('trail_name').textContent = trailData.name;
   document.getElementById('latitude').textContent = trailData.latitude;
   document.getElementById('longitude') = trailData.longitude;
   document.getElementById('elev_gain').textContent = trailData.elev_gain;
   document.getElementById('length').textContent = trailData.length;
+  document.querySelector('#trail_name').textContent = trailData.name;
 };
-
+ 
 // Once the DOM is ready...
 window.addEventListener('DOMContentLoaded', () => {
   // ...query for the active tab...
