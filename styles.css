@@ -45,3 +45,7 @@ body {
   font-size: 3rem;
   display: inline;
 }
+
+#map {
+  height: 100%;
+}
