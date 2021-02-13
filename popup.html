@@ -7,6 +7,7 @@
     crossorigin="anonymous" />
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <script type="text/javascript" src="popup.js"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -14,29 +15,17 @@
 <body>
   <h1 class="container--header">Chisel</h1>
   <div class="popup">
-    <div class="container container--name">
-      <h3 class="container--componant__header">Trail Name</h3>
-      <p class="container--componant__sub" id="trail_name">Data goes here</p>
+    <div class="container--name">
+      <h3 class="container--componant__header" id="trail_name">Trail Name</h3>
     </div>
     <div class="container">
-      <h3 class="container--componant__header">Trail Latitude</h3>
-      <p class="container--componant__sub" id="trail__latitude">Data goes here</p>
-    </div>
-    <div class="container">
-      <h3 class="container--componant__header">Trail Longitude</h3>
-      <p class="container--componant__sub" id="trail__longitude">Data goes here</p>
-    </div>
-    <div class="container">
-      <h3 class="container--componant__header">User Elevation</h3>
-      <p class="container--componant__sub" id="elevation">Data goes here</p>
-    </div>
-    <div class="container">
-      <h3 class="container--componant__header">Trail Length</h3>
-      <p class="container--componant__sub" id="trail__length">Data goes here</p>
-    </div>
-    <div class="container">
-      <h3 class="container--componant__header">Elevation Gain</h3>
-      <p class="container--componant__sub" id="elev_gain">Data goes here</p>
+      <ul class="container--list">
+        <li class="container--list__item" id="trail_latitude">Trail Latitude</li>
+        <li class="container--list__item" id="trail__longitude">Trail Longitude</li>
+        <li class="container--list__item" id="elevation">User Elevation</li>
+        <li class="container--list__item" id="trail_length">Trail Length</li>
+        <li class="container--list__item" id="elev_gain">Elevation Gain</li>
+      </ul>
     </div>
   </div>
 </body>

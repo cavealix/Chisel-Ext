@@ -9,18 +9,25 @@ body {
 .popup {
   width: 50rem;
   padding: 0.5rem 2rem 2rem 2rem;
+  font-family: "Lato", sans-serif;
 }
 
 .container {
-  height: 10rem;
-  margin: 1rem;
-  padding: 1rem;
+  margin: 2rem;
+  padding: 2rem;
   display: flex;
-  flex-direction: column;
   border: 1px solid black;
   justify-content: center;
   align-items: center;
   background-color: #fff;
+}
+
+.container--list {
+  display: flex;
+}
+
+.container--list__item {
+  font-size: 1.6rem;
 }
 .container--header {
   padding: 2.5rem;
@@ -28,7 +35,6 @@ body {
   text-align: center;
   text-transform: lowercase;
   font-family: "Yellowtail", cursive;
-  /* background-color: #428a13; */
   color: white;
 }
 
@@ -36,6 +42,7 @@ body {
   font-size: 3.5rem;
   text-align: center;
 }
+
 .container--componant__header {
   font-size: 4rem;
 }
