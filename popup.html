@@ -1,87 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="./style.css" />
 
-    <script type="text/javascript" src="popup.js"></script>
-  </head>
-  <body>
-    <h3 style="font-weight:bold; text-align:center;">DOM Info</h3>
-    <table border="1" cellpadding="3" style="border-collapse:collapse;">
-      <!-- alltrails data -->
-      <tr>
-        <td nowrap>Trail Name:</td>
-        <td align="right"><span id="trail_name">N/A</span></td>
-      </tr>
-      <tr>
-        <td nowrap>Trail Latitude:</td>
-        <td align="right"><span id="latitude">N/A</span></td>
-      </tr>
-      <tr>
-        <td nowrap>Trail Longitude:</td>
-        <td align="right"><span id="longitude">N/A</span></td>
-      </tr>
-        <td nowrap>Trail Length:</td>
-        <td align="right"><span id="length">N/A</span></td>
-      </tr>
-      <tr>
-        <td nowrap>Elevation Gain:</td>
-        <td align="right"><span id="elev_gain">N/A</span></td>
-      </tr>
-      <tr>
-        <td nowrap>User Elevation:</td>
-        <td align="right"><span id="user_elevation">Fetching data...</span></td>
-      </tr>
-      <tr>
-        <tr>
-        <td nowrap>Effort:</td>
-        <td align="right"><span id="effort">Calculating data...</span></td>
-      </tr>
-      <tr>
-        <tr>
-        <tr>
-        <td nowrap>Feels Like:</td>
-        <td align="right"><span id="feels_like">Calculating data...</span></td>
-      </tr>
-      <tr>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+    integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
+    crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="popup.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
 
-      <tr>
-        <td nowrap>Start Elevation:</td>
-        <td align="right"><span id="start_elev">Fetching data...</span></td>
-      </tr>
-      <tr>
-      <tr>
-        <td nowrap>End Elevation:</td>
-        <td align="right"><span id="end_elev">Fetching data...</span></td>
-      </tr>
-      <tr>
-        <tr>
-        <td nowrap>Max Elevation:</td>
-        <td align="right"><span id="max_elev">Calculating data...</span></td>
-      </tr>
-      <tr>
-        <tr>
-        <tr>
-        <td nowrap>Min Elevation:</td>
-        <td align="right"><span id="min_elev">Calculating data...</span></td>
-      </tr>
-      <tr>
-    </table>
+<body>
+  <h1 class="container--header">Chisel</h1>
+  <div class="popup">
+    <div class="container container--name">
+      <h3 class="container--componant__header" id="tail_name">Trail Name</h3>
+    </div>
+    <div class="container">
+      <h3 class="container--componant__header">Trail Latitude</h3>
+      <p class="container--componant__sub" id="trail_latitude">Data goes here</p>
+    </div>
+    <div class="container">
+      <h3 class="container--componant__header">Trail Longitude</h3>
+      <p class="container--componant__sub" id="trail_longitude">Data goes here</p>
+    </div>
+    <div class="container">
+      <h3 class="container--componant__header">User Elevation</h3>
+      <p class="container--componant__sub" id="elevation">Data goes here</p>
+    </div>
+    <div class="container">
+      <h3 class="container--componant__header">Trail Length</h3>
+      <p class="container--componant__sub" id="trail__length">Data goes here</p>
+    </div>
+    <div class="container">
+      <h3 class="container--componant__header">Elevation Gain</h3>
+      <p class="container--componant__sub" id="elev_gain">Data goes here</p>
+    </div>
+  </div>
+</body>
 
-    <!-- Google Map -->
-    <div id="map"></div>
-
-    <!-- Rounded switch -->
-    <label class="switch">
-      <input type="checkbox">
-      <span class="slider round"></span>
-    </label>
-
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <!-- <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6vPQadfKIysVDgq0so6T3-OReZbIfBa4&callback=initMap"
-      async
-    ></script> -->
-
-  </body>
 </html>
