@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script type="text/javascript" src="effort.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+
     <script type="text/javascript" src="popup.js"></script>
   </head>
   <body>
@@ -28,11 +29,6 @@
         <td align="right"><span id="elev_gain">N/A</span></td>
       </tr>
       <tr>
-        <td nowrap>Trail Elevation:</td>
-        <td align="right"><span id="trail_elevation">Fetching data...</span></td>
-      </tr>
-      <tr>
-      <tr>
         <td nowrap>User Elevation:</td>
         <td align="right"><span id="user_elevation">Fetching data...</span></td>
       </tr>
@@ -48,6 +44,44 @@
         <td align="right"><span id="feels_like">Calculating data...</span></td>
       </tr>
       <tr>
+
+      <tr>
+        <td nowrap>Start Elevation:</td>
+        <td align="right"><span id="start_elev">Fetching data...</span></td>
+      </tr>
+      <tr>
+      <tr>
+        <td nowrap>End Elevation:</td>
+        <td align="right"><span id="end_elev">Fetching data...</span></td>
+      </tr>
+      <tr>
+        <tr>
+        <td nowrap>Max Elevation:</td>
+        <td align="right"><span id="max_elev">Calculating data...</span></td>
+      </tr>
+      <tr>
+        <tr>
+        <tr>
+        <td nowrap>Min Elevation:</td>
+        <td align="right"><span id="min_elev">Calculating data...</span></td>
+      </tr>
+      <tr>
     </table>
+
+    <!-- Google Map -->
+    <div id="map"></div>
+
+    <!-- Rounded switch -->
+    <label class="switch">
+      <input type="checkbox">
+      <span class="slider round"></span>
+    </label>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <!-- <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6vPQadfKIysVDgq0so6T3-OReZbIfBa4&callback=initMap"
+      async
+    ></script> -->
+
   </body>
 </html>

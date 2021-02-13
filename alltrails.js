@@ -1,11 +1,5 @@
 var trailData = {};
-
-// Inform the background page that 
-// this tab should have a page-action.
-chrome.runtime.sendMessage({
-  from: 'alltrails',
-  subject: 'showPageAction',
-});
+var histWeather = {};
 
 
 //Calculate Effort
@@ -36,7 +30,7 @@ function effort (user_elev, trail_elev, distance, gain) {
 	else {
 
 		effort = Math.round(((1.5*W + 2*(W + L)*(L/W)^2 + N*(W + L)*(1.5*V^2 + 0.35*V*G)) / (1.5*W + 2*(W + L)*(L/W)^2 + N*(W + L)*(1.5*V^2)) * ((user_elev - trail_elev)/1000*.956))*100);
- 		console.log(effort);
+ 		//console.log(effort);
     return effort;
 
 	}
@@ -51,6 +45,7 @@ function geoSuccess(pos){
     	{from: 'alltrails', subject: 'getElevation', lat: pos.coords.latitude, lon: pos.coords.longitude}, (response) => {
     		// ...also specifying a callback to be called 
     		//from the receiving end (content script).
+        console.log(response);
         trailData.user_elevation = Math.round(response.results[0].elevation);
     		//send elevation data to popup.js
     		chrome.runtime.sendMessage({from: 'alltrails', subject: 'user_elevation', data: response});
@@ -62,6 +57,9 @@ function geoSuccess(pos){
 if (navigator.geolocation){
     navigator.geolocation.getCurrentPosition(geoSuccess);
 }
+else {
+  console.log('prompt user for location access');
+}
 
 
 // Listen for messages from the popup.
@@ -69,24 +67,20 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
   // First, validate the message's structure.
   if ((msg.from === 'popup') && (msg.subject === 'DOMInfo')) {
     // Collect the necessary data. 
-  
-    /*var rootElement = document.getElementById('desktop-header').childNodes[1].getAttribute("data-react-props");
-    var rootData = JSON.parse(rootElement);
-    console.log(rootData);*/
 
     //Read Trail Data
-    var content = document.getElementById('main').childNodes[1].childNodes[1].getAttribute("data-react-props");
-    var contentData = JSON.parse(content);
+    if (document.getElementById('main')) {
+      var content = document.getElementById('main').childNodes[1].childNodes[1].getAttribute("data-react-props");
+      var contentData = JSON.parse(content);
+    }
 
-  //Get Trail Elevation
-	chrome.runtime.sendMessage(
-    	{from: 'alltrails', subject: 'getElevation', lat: contentData.initialCenter[0], lon: contentData.initialCenter[1]}, (response) => {
-    		// ...also specifying a callback to be called 
-    		//from the receiving end (content script).
+    //Get historical weather
+    chrome.runtime.sendMessage(
+      {from: 'alltrails', subject: 'getWeather', lat: contentData.initialCenter[0], lon: contentData.initialCenter[1]}, (response) => {
+        // ...also specifying a callback to be called 
+        //from the receiving end (content script).
         console.log(response);
-        trailData.trail_elevation = Math.round(response.results[0].elevation);
-    		//send elevation data to popup.js
-    		chrome.runtime.sendMessage({from: 'alltrails', subject: 'trail_elevation', data: response});
+        histWeather = response.data.weather;
     });
 
 
@@ -98,10 +92,25 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
     trailData.longitude = contentData.initialCenter[1];
     trailData.elev_gain = Math.round(contentData.initialSelectedObject.elevation_gain);
     trailData.length = Math.round(contentData.initialSelectedObject.length);
-    trailData.effort = effort(trailData.user_elevation,trailData.trail_elevation,trailData.length,trailData.elev_gain);
+    trailData.elev_min = Math.round(contentData.initialExploreMap.routes[0].lineGeoStats.elevationMin);
+    trailData.elev_max = Math.round(contentData.initialExploreMap.routes[0].lineGeoStats.elevationMax);
+    trailData.elev_start = Math.round(contentData.initialExploreMap.routes[0].lineGeoStats.elevationStart);
+    trailData.elev_end = Math.round(contentData.initialExploreMap.routes[0].lineGeoStats.elevationEnd);
+    trailData.bounds = contentData.initialBounds;
+
+    trailData.effort = effort(trailData.user_elevation,trailData.elev_start,trailData.length,trailData.elev_gain);
 
 
     //send reply of trail data back to popup.js
     response(trailData);
   }
 });
+
+
+// Inform the background page that 
+// this tab should have a page-action.
+chrome.runtime.sendMessage({
+  from: 'alltrails',
+  subject: 'showPageAction',
+});
+
