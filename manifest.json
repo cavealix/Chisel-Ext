@@ -10,11 +10,6 @@
     "scripts": ["background.js"]
   },
   "content_scripts": [{
-    "matches": ["*://*.stackoverflow.com/*"],
-    "js": ["alltrails.js"],
-    "run_at": "document_idle",
-    "all_frames": false
-  }, {
     "matches": ["*://*.alltrails.com/*"],
     "js": ["alltrails.js"],
     "all_frames": false
