@@ -15,28 +15,31 @@
 <body>
   <h1 class="container--header">Chisel</h1>
   <div class="popup">
-    <div class="container container--name">
-      <h3 class="container--componant__header" id="tail_name">Trail Name</h3>
+    <div class="container--name">
+      <h2 class="container--componant__header" id="tail_name">Trail Name</h2>
     </div>
     <div class="container">
-      <h3 class="container--componant__header">Trail Latitude</h3>
-      <p class="container--componant__sub" id="trail_latitude">Data goes here</p>
+      <ul class="container--list">
+        <li class="container--list__item">Trail Latitude:<span id="trail_latitude">1111</span></li>
+        <li class="container--list__item">Trail Longitude:<span id="trail_longitude">1111</span>
+        </li>
+        <li class="container--list__item">User Elevation:<span id="elevation">1111</span></li>
+        <li class="container--list__item">Trail Length:<span id="trail_length">1111</span></li>
+        <li class="container--list__item">Elevation Gain:<span id="elev_gain">1111</span></li>
+      </ul>
     </div>
     <div class="container">
-      <h3 class="container--componant__header">Trail Longitude</h3>
-      <p class="container--componant__sub" id="trail_longitude">Data goes here</p>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.133541261337!2d-97.42207063486637!3d32.73564454340102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e733ccd5f6963%3A0xcb32a8d720165c47!2s6200%20Pershing%20Ave%2C%20Fort%20Worth%2C%20TX%2076116!5e0!3m2!1sen!2sus!4v1613332679274!5m2!1sen!2sus"
+        width="600" height="450" frameborder="0" style="border:0; border-radius: 0.5rem;" allowfullscreen=""
+        aria-hidden="false" tabindex="0"></iframe>
     </div>
     <div class="container">
-      <h3 class="container--componant__header">User Elevation</h3>
-      <p class="container--componant__sub" id="elevation">Data goes here</p>
-    </div>
-    <div class="container">
-      <h3 class="container--componant__header">Trail Length</h3>
-      <p class="container--componant__sub" id="trail__length">Data goes here</p>
-    </div>
-    <div class="container">
-      <h3 class="container--componant__header">Elevation Gain</h3>
-      <p class="container--componant__sub" id="elev_gain">Data goes here</p>
+      <div id="wwo-weather-widget-2"></div>
+      <script type='text/javascript'
+        script-src-elem='https://www.worldweatheronline.com/widget/v5/weather-widget.ashx?loc=2656458&wid=2&tu=1&div=wwo-weather-widget-2'
+        async></script><noscript><a href="https://www.worldweatheronline.com/lakeside-weather/texas/us.aspx"
+          alt="Hour by hour Lakeside, Texas weather">Lakeside, Texas weather forecast hourly</a></noscript>
     </div>
   </div>
 </body>

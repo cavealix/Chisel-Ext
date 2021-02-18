@@ -4,23 +4,21 @@
 
 body {
   background-image: url("/background.jpeg");
-  background-size: auto;
+  background-size: cover;
 }
 .popup {
-  width: 50rem;
   padding: 0.5rem 2rem 2rem 2rem;
 }
 
 .container {
-  height: 10rem;
-  margin: 1rem;
-  padding: 1rem;
+  margin: 2rem;
+  /* padding: 0.5rem; */
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
-  justify-content: center;
+  /* border: 1px solid black; */
   align-items: center;
-  background-color: #fff;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 0.5rem;
 }
 .container--header {
   padding: 2.5rem;
@@ -28,22 +26,21 @@ body {
   text-align: center;
   text-transform: lowercase;
   font-family: "Yellowtail", cursive;
-  /* background-color: #428a13; */
   color: white;
 }
-
-.container--name {
-  font-size: 3.5rem;
-  text-align: center;
-}
 .container--componant__header {
-  font-size: 4rem;
+  text-align: center;
   font-family: "Lato", sans-serif;
+  font-size: 2rem;
+}
+.container--list {
+  columns: 3;
+  font-size: 1.5rem;
 }
 
-.container--componant__sub {
-  font-size: 3rem;
-  display: inline;
+.container--list__item {
+  padding: 1.5rem;
+  margin: 1.5rem;
 }
 
 #map {
