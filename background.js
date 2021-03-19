@@ -15,6 +15,7 @@ async function fetchJSON(pathToResource) {
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
   // First, validate the message's structure.
   console.log(msg);
+
   if ((msg.from === 'alltrails') && (msg.subject === 'getElevation')) {
     var url = "https://maps.googleapis.com/maps/api/elevation/json?locations="+msg.lat+','+msg.lon+"&key=AIzaSyA6vPQadfKIysVDgq0so6T3-OReZbIfBa4";
     //request API fetch, wait to be fulfilled, then return result as original message response
@@ -44,12 +45,13 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
 });
   
 
-//show popup for alltrails.com
+
+// Listen for messages from the popup.
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
   // First, validate the message's structure.
-  if ((msg.from === 'alltrails') && (msg.subject === 'showPageAction')) {
-    // Enable the page-action for the requesting tab.
-    chrome.pageAction.show(sender.tab.id);
+  if ((msg.from === 'popup') && (msg.subject === 'DOMInfo')) {
+    console.log('dom loaded');
+
   }
 });
 

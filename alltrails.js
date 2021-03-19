@@ -1,5 +1,5 @@
+//Variables
 var trailData = {};
-var histWeather = {};
 
 
 //Calculate Effort
@@ -23,7 +23,7 @@ function effort (user_elev, trail_elev, distance, gain) {
 	if (user_elev <= trail_elev) {
 
 		effort = Math.round(((1.5*W + 2*(W + L)*(L/W)^2 + N*(W + L)*(1.5*V^2 + 0.35*V*G)) / (1.5*W + 2*(W + L)*(L/W)^2 + N*(W + L)*(1.5*V^2)) * ((trail_elev - user_elev)/1000*1.044))*100);
- 		console.log(effort);
+ 		//console.log(effort);
     return effort;
 
 	}
@@ -39,7 +39,7 @@ function effort (user_elev, trail_elev, distance, gain) {
 
 //Get User Elevation
 function geoSuccess(pos){
-
+    console.log(pos.json());
 	//send url api call for User Elevation to background to avoid CORs restrictions
 	chrome.runtime.sendMessage(
     	{from: 'alltrails', subject: 'getElevation', lat: pos.coords.latitude, lon: pos.coords.longitude}, (response) => {
@@ -47,15 +47,29 @@ function geoSuccess(pos){
     		//from the receiving end (content script).
         console.log(response);
         trailData.user_elevation = Math.round(response.results[0].elevation);
-    		//send elevation data to popup.js
-    		chrome.runtime.sendMessage({from: 'alltrails', subject: 'user_elevation', data: response});
+    	
+        //send elevation data to popup.js
+    	//chrome.runtime.sendMessage({from: 'alltrails', subject: 'user_elevation', data: response});
     });
 }
 
 
+var geoError = function(error) {
+    console.log('Error occurred. Error code: ' + error.code);
+    // error.code can be:
+    //   0: unknown error
+    //   1: permission denied
+    //   2: position unavailable (error response from location provider)
+    //   3: timed out
+  };
+
+function locateUser () {
+    navigator.geolocation.getCurrentPosition(geoSuccess,geoError);
+}
+
 //Get User Location
 if (navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(geoSuccess);
+    locateUser();
 }
 else {
   console.log('prompt user for location access');
@@ -77,10 +91,11 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
     //Get historical weather
     chrome.runtime.sendMessage(
       {from: 'alltrails', subject: 'getWeather', lat: contentData.initialCenter[0], lon: contentData.initialCenter[1]}, (response) => {
-        // ...also specifying a callback to be called 
-        //from the receiving end (content script).
-        console.log(response);
-        histWeather = response.data.weather;
+
+        //send Historical Weather Data to popup
+        chrome.runtime.sendMessage(
+            {from:'alltrails', subject: 'weatherData', data: response.data.weather}
+        );
     });
 
 
@@ -98,6 +113,8 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
     trailData.elev_end = Math.round(contentData.initialExploreMap.routes[0].lineGeoStats.elevationEnd);
     trailData.bounds = contentData.initialBounds;
 
+    trailData.segments = contentData.initialExploreMap.routes[0].lineSegments;
+
     trailData.effort = effort(trailData.user_elevation,trailData.elev_start,trailData.length,trailData.elev_gain);
 
 
@@ -113,4 +130,5 @@ chrome.runtime.sendMessage({
   from: 'alltrails',
   subject: 'showPageAction',
 });
+
 
